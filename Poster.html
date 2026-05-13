@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Póster Arquitectónico: ProUdeC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: #050b14;
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 255, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(177, 0, 255, 0.05), transparent 25%);
+        }
+
+        h1, h2, h3, .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Neon Glow Effects */
+        .glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5), inset 0 0 10px rgba(239, 68, 68, 0.2); }
+        .glow-yellow { box-shadow: 0 0 15px rgba(234, 179, 8, 0.5), inset 0 0 10px rgba(234, 179, 8, 0.2); }
+        .glow-cyan { box-shadow: 0 0 15px rgba(6, 182, 212, 0.5), inset 0 0 10px rgba(6, 182, 212, 0.2); }
+        .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.5), inset 0 0 10px rgba(34, 197, 94, 0.2); }
+
+        /* Lines and Connections */
+        .connection-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 0;
+        }
+        
+        .animated-line {
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), transparent);
+            background-size: 200% 100%;
+            animation: moveLine 2s linear infinite;
+        }
+
+        .animated-line-vertical {
+            background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.8), transparent);
+            background-size: 100% 200%;
+            animation: moveLineVert 2s linear infinite;
+        }
+
+        @keyframes moveLine {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        @keyframes moveLineVert {
+            0% { background-position: 0 100%; }
+            100% { background-position: 0 -100%; }
+        }
+
+        .diagram-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .diagram-node {
+            z-index: 20;
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Glitch effect for title */
+        .glitch-wrapper {
+            position: relative;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050b14;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 86px, 0); }
+            20% { clip: rect(32px, 9999px, 11px, 0); }
+            40% { clip: rect(74px, 9999px, 54px, 0); }
+            60% { clip: rect(14px, 9999px, 45px, 0); }
+            80% { clip: rect(89px, 9999px, 5px, 0); }
+            100% { clip: rect(2px, 9999px, 23px, 0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+
+    <!-- Header / Title -->
+    <header class="text-center mb-12 w-full max-w-7xl">
+        <div class="inline-block border-b-2 border-cyan-500 pb-4 mb-4">
+            <h2 class="text-cyan-400 uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-2">Evolución Arquitectónica</h2>
+            <h1 class="text-5xl md:text-7xl font-black text-white glitch-wrapper tracking-wider">
+                <span class="glitch" data-text="ProUdeC">ProUdeC</span>
+            </h1>
+        </div>
+        <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mt-4 font-light">
+            Transición del sistema monolítico heredado hacia un ecosistema moderno, escalable y resiliente.
+        </p>
+        <div class="mt-4 flex justify-center gap-6 text-sm text-gray-500">
+            <span class="flex items-center gap-2"><i data-lucide="user"></i> Daniel Esteban Contreras Motoa</span>
+            <span class="flex items-center gap-2"><i data-lucide="user"></i> Michael Yamid Suarez Patiño</span>
+        </div>
+    </header>
+
+    <!-- Main Grid for Diagrams -->
+    <main class="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+
+        <!-- Phase 1: Monolith -->
+        <article class="bg-gray-900/50 border border-red-900 rounded-xl p-6 relative overflow-hidden group hover:border-red-500 transition-colors duration-500">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900"></div>
+            
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <span class="text-red-500 font-bold tracking-widest text-xs uppercase">Fase 01</span>
+                    <h3 class="text-2xl font-bold text-white mt-1">Monolito</h3>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-red-900/30 flex items-center justify-center text-red-500">
+                    <i data-lucide="box"></i>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm mb-8">
+                Toda la lógica de negocio (Autenticación, Académico, Evaluaciones) agrupada en un solo código base y un único despliegue. Alto acoplamiento.
+            </p>
+
+            <!-- Diagram: Monolith -->
+            <div class="diagram-container flex flex-col items-center gap-4 py-4">
+                <!-- Client -->
+                <div class="diagram-node bg-gray-800 border border-gray-600 rounded-md p-3 text-center w-3/4 flex flex-col items-center gap-2">
+                    <i data-lucide="monitor-smartphone" class="text-gray-300"></i>
+                    <span class="text-xs">Cliente (UI)</span>
+                </div>
+
+                <!-- Arrow down -->
+                <div class="h-8 w-px bg-red-500/50 relative">
+                    <div class="absolute inset-0 animated-line-vertical"></div>
+                </div>
+
+                <!-- Big Monolith Box -->
+                <div class="diagram-node glow-red bg-red-950/20 border-2 border-red-700 rounded-lg p-4 w-full flex flex-col gap-3">
+                    <div class="text-center text-red-400 font-bold text-sm border-b border-red-800/50 pb-2">Servidor ProUdeC (App)</div>
+                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Autenticación</div>
+                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Académico</div>
+                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Evaluaciones</div>
+                </div>
+
+                <!-- Arrow down -->
+                <div class="h-8 w-px bg-red-500/50 relative">
+                    <div class="absolute inset-0 animated-line-vertical"></div>
+                </div>
+
+                <!-- Single DB -->
+                <div class="diagram-node bg-gray-800 border border-red-600 rounded-md p-3 text-center w-3/4 flex flex-col items-center gap-2 glow-red">
+                    <i data-lucide="database" class="text-red-400"></i>
+                    <span class="text-xs">Base de Datos Única<br>(PostgreSQL)</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Phase 2: SOA -->
+        <article class="bg-gray-900/50 border border-yellow-900 rounded-xl p-6 relative overflow-hidden group hover:border-yellow-500 transition-colors duration-500">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-orange-600"></div>
+            
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <span class="text-yellow-500 font-bold tracking-widest text-xs uppercase">Fase 02</span>
+                    <h3 class="text-2xl font-bold text-white mt-1">SOA</h3>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-yellow-900/30 flex items-center justify-center text-yellow-500">
+                    <i data-lucide="network"></i>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm mb-8">
+                Desacoplamiento inicial mediante Arquitectura Orientada a Servicios. Integración centralizada a través de un Bus de Servicio Empresarial (ESB).
+            </p>
+
+            <!-- Diagram: SOA -->
+            <div class="diagram-container flex flex-col items-center py-4">
+                
+                <!-- Client -->
+                <div class="diagram-node bg-gray-800 border border-gray-600 rounded-md p-3 text-center w-1/2 flex justify-center mb-6">
+                    <span class="text-xs">Aplicaciones Cliente</span>
+                </div>
+
+                <!-- ESB -->
+                <div class="w-full relative flex justify-center mb-6">
+                    <div class="absolute w-px h-6 bg-yellow-500/50 -top-6"></div>
+                    <div class="diagram-node glow-yellow bg-yellow-900/30 border-2 border-yellow-600 rounded w-full py-2 text-center text-yellow-400 font-bold text-sm tracking-widest z-10 relative">
+                        <div class="absolute inset-0 animated-line opacity-50"></div>
+                        ENTERPRISE SERVICE BUS (ESB)
+                    </div>
+                </div>
+
+                <!-- Services Row -->
+                <div class="flex w-full justify-between relative mb-6">
+                    <!-- Connections to ESB -->
+                    <div class="absolute w-full h-6 border-l border-r border-yellow-500/30 top-[-24px] z-0 flex justify-center">
+                        <div class="w-px h-full bg-yellow-500/30"></div>
+                    </div>
+
+                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
+                        <i data-lucide="shield-check" class="w-4 h-4 mb-1 text-yellow-500"></i>
+                        Auth
+                    </div>
+                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
+                        <i data-lucide="book-open" class="w-4 h-4 mb-1 text-yellow-500"></i>
+                        Académico
+                    </div>
+                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
+                        <i data-lucide="file-check" class="w-4 h-4 mb-1 text-yellow-500"></i>
+                        Eval
+                    </div>
+                </div>
+
+                <!-- Arrow down -->
+                <div class="h-6 w-px bg-yellow-500/50 mb-2"></div>
+
+                <!-- Shared DB -->
+                <div class="diagram-node bg-gray-800 border border-yellow-700 rounded-md p-3 text-center w-3/4 flex items-center justify-center gap-2">
+                    <i data-lucide="database" class="text-yellow-500 w-5 h-5"></i>
+                    <span class="text-xs">Base de Datos Compartida</span>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- Phase 3: Microservices -->
+        <article class="bg-gray-900/50 border border-cyan-900 rounded-xl p-6 relative overflow-hidden group hover:border-cyan-500 transition-colors duration-500 lg:transform lg:scale-105 shadow-2xl shadow-cyan-900/20">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-600"></div>
+            
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <span class="text-cyan-400 font-bold tracking-widest text-xs uppercase glow-text">Fase 03 (Actual)</span>
+                    <h3 class="text-2xl font-bold text-white mt-1">Microservicios</h3>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center text-cyan-400">
+                    <i data-lucide="cpu"></i>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm mb-6">
+                Despliegue distribuido. Servicios independientes y políglotas con sus propias bases de datos. Mayor escalabilidad y resiliencia (Circuit Breaker).
+            </p>
+
+            <!-- Diagram: Microservices -->
+            <div class="diagram-container flex flex-col items-center pt-2 pb-4">
+                
+                <!-- Client & API Gateway -->
+                <div class="w-full flex flex-col items-center mb-6">
+                    <div class="diagram-node bg-gray-800 border border-gray-600 rounded-full px-6 py-2 text-xs mb-3 flex items-center gap-2">
+                        <i data-lucide="globe" class="w-4 h-4"></i> Clientes (Web/Mobile)
+                    </div>
+                    <div class="h-4 w-px bg-cyan-500/50 relative"><div class="absolute inset-0 animated-line-vertical"></div></div>
+                    <div class="diagram-node glow-cyan bg-cyan-900/40 border-2 border-cyan-500 rounded-lg w-full py-2 text-center text-cyan-300 font-bold text-xs">
+                        API GATEWAY & ENRUTAMIENTO
+                    </div>
+                </div>
+
+                <!-- Nodes Grid -->
+                <div class="w-full grid grid-cols-2 gap-4 relative">
+                    
+                    <!-- SVG Lines connecting Gateway to Services -->
+                    <svg class="absolute inset-0 w-full h-10 -top-8 z-0 pointer-events-none" preserveAspectRatio="none">
+                        <path d="M 50%,0 L 25%,100 M 50%,0 L 75%,100" stroke="rgba(6, 182, 212, 0.4)" stroke-width="1.5" fill="none" class="dash-anim"/>
+                    </svg>
+
+                    <!-- MS 1: Auth -->
+                    <div class="diagram-node flex flex-col items-center">
+                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40">
+                            <i data-lucide="shield" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
+                            <div class="text-[10px] font-bold text-gray-200">MS Autenticación</div>
+                        </div>
+                        <div class="h-4 w-px bg-purple-500/50"></div>
+                        <div class="bg-gray-900 border border-purple-800 rounded-full px-3 py-1 text-[9px] text-purple-300 flex items-center gap-1">
+                            <i data-lucide="database" class="w-3 h-3"></i> Redis
+                        </div>
+                    </div>
+
+                    <!-- MS 2: Academico -->
+                    <div class="diagram-node flex flex-col items-center">
+                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
+                            <div class="text-[10px] font-bold text-gray-200">MS Académico</div>
+                        </div>
+                        <div class="h-4 w-px bg-blue-500/50"></div>
+                        <div class="bg-gray-900 border border-blue-800 rounded-full px-3 py-1 text-[9px] text-blue-300 flex items-center gap-1">
+                            <i data-lucide="database" class="w-3 h-3"></i> PostgreSQL
+                        </div>
+                    </div>
+
+                    <!-- MS 3: Eval -->
+                    <div class="diagram-node flex flex-col items-center col-span-2 mt-2 w-1/2 mx-auto">
+                        <div class="absolute w-px h-4 bg-cyan-500/50 -top-4"></div>
+                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40 relative">
+                            <i data-lucide="file-edit" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
+                            <div class="text-[10px] font-bold text-gray-200">MS Evaluaciones</div>
+                        </div>
+                        <div class="h-4 w-px bg-green-500/50"></div>
+                        <div class="bg-gray-900 border border-green-800 rounded-full px-3 py-1 text-[9px] text-green-300 flex items-center gap-1">
+                            <i data-lucide="database" class="w-3 h-3"></i> MongoDB
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Event Bus (Optional representation) -->
+                <div class="mt-6 w-full border-t border-dashed border-gray-700 pt-3 text-center">
+                    <span class="text-[10px] text-gray-500 tracking-widest"><i data-lucide="zap" class="inline w-3 h-3"></i> EVENT BUS ASÍNCRONO</span>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 text-center text-gray-600 text-sm border-t border-gray-800 w-full max-w-7xl pt-6">
+        <p>Documento Base: ProUdeC de Monolito a Microservicios | Universidad de Cundinamarca</p>
+        <p class="text-xs mt-1">Ingeniería de Software II - Mayo 2026</p>
+    </footer>
+
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+        
+        // Efecto parallax simple al mover el ratón
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('article');
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            cards.forEach(card => {
+                // Solo aplicar a pantallas grandes para no romper mobile
+                if(window.innerWidth > 1024) {
+                    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
