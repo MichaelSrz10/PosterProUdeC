@@ -3,359 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Póster Arquitectónico: ProUdeC</title>
+    <title>Arquitectura de Software: Apple Pay Zero Trust & AI</title>
+    <!-- Tailwind CSS for corporate UI -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
-            background-color: #050b14;
-            color: #e2e8f0;
-            font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 255, 255, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(177, 0, 255, 0.05), transparent 25%);
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
         }
-
-        h1, h2, h3, .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
+        .mermaid-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            overflow-x: auto;
+            margin-bottom: 2rem;
         }
-
-        /* Neon Glow Effects */
-        .glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5), inset 0 0 10px rgba(239, 68, 68, 0.2); }
-        .glow-yellow { box-shadow: 0 0 15px rgba(234, 179, 8, 0.5), inset 0 0 10px rgba(234, 179, 8, 0.2); }
-        .glow-cyan { box-shadow: 0 0 15px rgba(6, 182, 212, 0.5), inset 0 0 10px rgba(6, 182, 212, 0.2); }
-        .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.5), inset 0 0 10px rgba(34, 197, 94, 0.2); }
-
-        /* Lines and Connections */
-        .connection-line {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 0;
+        .note-card {
+            background: white;
+            border-left: 4px solid #3b82f6;
+            transition: transform 0.2s;
         }
-        
-        .animated-line {
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), transparent);
-            background-size: 200% 100%;
-            animation: moveLine 2s linear infinite;
-        }
-
-        .animated-line-vertical {
-            background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.8), transparent);
-            background-size: 100% 200%;
-            animation: moveLineVert 2s linear infinite;
-        }
-
-        @keyframes moveLine {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
-        }
-
-        @keyframes moveLineVert {
-            0% { background-position: 0 100%; }
-            100% { background-position: 0 -100%; }
-        }
-
-        .diagram-container {
-            position: relative;
-            z-index: 10;
-        }
-        
-        .diagram-node {
-            z-index: 20;
-            position: relative;
-            backdrop-filter: blur(4px);
-        }
-
-        /* Glitch effect for title */
-        .glitch-wrapper {
-            position: relative;
-        }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #050b14;
-        }
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00c1;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00fff9;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 86px, 0); }
-            20% { clip: rect(32px, 9999px, 11px, 0); }
-            40% { clip: rect(74px, 9999px, 54px, 0); }
-            60% { clip: rect(14px, 9999px, 45px, 0); }
-            80% { clip: rect(89px, 9999px, 5px, 0); }
-            100% { clip: rect(2px, 9999px, 23px, 0); }
+        .note-card:hover {
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+<body class="text-slate-800 antialiased">
 
-    <!-- Header / Title -->
-    <header class="text-center mb-12 w-full max-w-7xl">
-        <div class="inline-block border-b-2 border-cyan-500 pb-4 mb-4">
-            <h2 class="text-cyan-400 uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-2">Evolución Arquitectónica</h2>
-            <h1 class="text-5xl md:text-7xl font-black text-white glitch-wrapper tracking-wider">
-                <span class="glitch" data-text="ProUdeC">ProUdeC</span>
-            </h1>
-        </div>
-        <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mt-4 font-light">
-            Transición del sistema monolítico heredado hacia un ecosistema moderno, escalable y resiliente.
-        </p>
-        <div class="mt-4 flex justify-center gap-6 text-sm text-gray-500">
-            <span class="flex items-center gap-2"><i data-lucide="user"></i> Daniel Esteban Contreras Motoa</span>
-            <span class="flex items-center gap-2"><i data-lucide="user"></i> Michael Yamid Suarez Patiño</span>
-        </div>
-    </header>
-
-    <!-- Main Grid for Diagrams -->
-    <main class="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-
-        <!-- Phase 1: Monolith -->
-        <article class="bg-gray-900/50 border border-red-900 rounded-xl p-6 relative overflow-hidden group hover:border-red-500 transition-colors duration-500">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900"></div>
-            
-            <div class="mb-6 flex items-center justify-between">
-                <div>
-                    <span class="text-red-500 font-bold tracking-widest text-xs uppercase">Fase 01</span>
-                    <h3 class="text-2xl font-bold text-white mt-1">Monolito</h3>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-red-900/30 flex items-center justify-center text-red-500">
-                    <i data-lucide="box"></i>
-                </div>
-            </div>
-
-            <p class="text-gray-400 text-sm mb-8">
-                Toda la lógica de negocio (Autenticación, Académico, Evaluaciones) agrupada en un solo código base y un único despliegue. Alto acoplamiento.
-            </p>
-
-            <!-- Diagram: Monolith -->
-            <div class="diagram-container flex flex-col items-center gap-4 py-4">
-                <!-- Client -->
-                <div class="diagram-node bg-gray-800 border border-gray-600 rounded-md p-3 text-center w-3/4 flex flex-col items-center gap-2">
-                    <i data-lucide="monitor-smartphone" class="text-gray-300"></i>
-                    <span class="text-xs">Cliente (UI)</span>
-                </div>
-
-                <!-- Arrow down -->
-                <div class="h-8 w-px bg-red-500/50 relative">
-                    <div class="absolute inset-0 animated-line-vertical"></div>
-                </div>
-
-                <!-- Big Monolith Box -->
-                <div class="diagram-node glow-red bg-red-950/20 border-2 border-red-700 rounded-lg p-4 w-full flex flex-col gap-3">
-                    <div class="text-center text-red-400 font-bold text-sm border-b border-red-800/50 pb-2">Servidor ProUdeC (App)</div>
-                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Autenticación</div>
-                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Académico</div>
-                    <div class="bg-red-900/40 border border-red-800 p-2 rounded text-xs text-center text-gray-200">Módulo Evaluaciones</div>
-                </div>
-
-                <!-- Arrow down -->
-                <div class="h-8 w-px bg-red-500/50 relative">
-                    <div class="absolute inset-0 animated-line-vertical"></div>
-                </div>
-
-                <!-- Single DB -->
-                <div class="diagram-node bg-gray-800 border border-red-600 rounded-md p-3 text-center w-3/4 flex flex-col items-center gap-2 glow-red">
-                    <i data-lucide="database" class="text-red-400"></i>
-                    <span class="text-xs">Base de Datos Única<br>(PostgreSQL)</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- Phase 2: SOA -->
-        <article class="bg-gray-900/50 border border-yellow-900 rounded-xl p-6 relative overflow-hidden group hover:border-yellow-500 transition-colors duration-500">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-orange-600"></div>
-            
-            <div class="mb-6 flex items-center justify-between">
-                <div>
-                    <span class="text-yellow-500 font-bold tracking-widest text-xs uppercase">Fase 02</span>
-                    <h3 class="text-2xl font-bold text-white mt-1">SOA</h3>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-yellow-900/30 flex items-center justify-center text-yellow-500">
-                    <i data-lucide="network"></i>
-                </div>
-            </div>
-
-            <p class="text-gray-400 text-sm mb-8">
-                Desacoplamiento inicial mediante Arquitectura Orientada a Servicios. Integración centralizada a través de un Bus de Servicio Empresarial (ESB).
-            </p>
-
-            <!-- Diagram: SOA -->
-            <div class="diagram-container flex flex-col items-center py-4">
-                
-                <!-- Client -->
-                <div class="diagram-node bg-gray-800 border border-gray-600 rounded-md p-3 text-center w-1/2 flex justify-center mb-6">
-                    <span class="text-xs">Aplicaciones Cliente</span>
-                </div>
-
-                <!-- ESB -->
-                <div class="w-full relative flex justify-center mb-6">
-                    <div class="absolute w-px h-6 bg-yellow-500/50 -top-6"></div>
-                    <div class="diagram-node glow-yellow bg-yellow-900/30 border-2 border-yellow-600 rounded w-full py-2 text-center text-yellow-400 font-bold text-sm tracking-widest z-10 relative">
-                        <div class="absolute inset-0 animated-line opacity-50"></div>
-                        ENTERPRISE SERVICE BUS (ESB)
-                    </div>
-                </div>
-
-                <!-- Services Row -->
-                <div class="flex w-full justify-between relative mb-6">
-                    <!-- Connections to ESB -->
-                    <div class="absolute w-full h-6 border-l border-r border-yellow-500/30 top-[-24px] z-0 flex justify-center">
-                        <div class="w-px h-full bg-yellow-500/30"></div>
-                    </div>
-
-                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
-                        <i data-lucide="shield-check" class="w-4 h-4 mb-1 text-yellow-500"></i>
-                        Auth
-                    </div>
-                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
-                        <i data-lucide="book-open" class="w-4 h-4 mb-1 text-yellow-500"></i>
-                        Académico
-                    </div>
-                    <div class="diagram-node bg-gray-800 border border-yellow-700 rounded p-2 text-center w-[30%] flex flex-col items-center text-xs">
-                        <i data-lucide="file-check" class="w-4 h-4 mb-1 text-yellow-500"></i>
-                        Eval
-                    </div>
-                </div>
-
-                <!-- Arrow down -->
-                <div class="h-6 w-px bg-yellow-500/50 mb-2"></div>
-
-                <!-- Shared DB -->
-                <div class="diagram-node bg-gray-800 border border-yellow-700 rounded-md p-3 text-center w-3/4 flex items-center justify-center gap-2">
-                    <i data-lucide="database" class="text-yellow-500 w-5 h-5"></i>
-                    <span class="text-xs">Base de Datos Compartida</span>
-                </div>
-
-            </div>
-        </article>
-
-        <!-- Phase 3: Microservices -->
-        <article class="bg-gray-900/50 border border-cyan-900 rounded-xl p-6 relative overflow-hidden group hover:border-cyan-500 transition-colors duration-500 lg:transform lg:scale-105 shadow-2xl shadow-cyan-900/20">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-600"></div>
-            
-            <div class="mb-6 flex items-center justify-between">
-                <div>
-                    <span class="text-cyan-400 font-bold tracking-widest text-xs uppercase glow-text">Fase 03 (Actual)</span>
-                    <h3 class="text-2xl font-bold text-white mt-1">Microservicios</h3>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-cyan-900/30 flex items-center justify-center text-cyan-400">
-                    <i data-lucide="cpu"></i>
-                </div>
-            </div>
-
-            <p class="text-gray-400 text-sm mb-6">
-                Despliegue distribuido. Servicios independientes y políglotas con sus propias bases de datos. Mayor escalabilidad y resiliencia (Circuit Breaker).
-            </p>
-
-            <!-- Diagram: Microservices -->
-            <div class="diagram-container flex flex-col items-center pt-2 pb-4">
-                
-                <!-- Client & API Gateway -->
-                <div class="w-full flex flex-col items-center mb-6">
-                    <div class="diagram-node bg-gray-800 border border-gray-600 rounded-full px-6 py-2 text-xs mb-3 flex items-center gap-2">
-                        <i data-lucide="globe" class="w-4 h-4"></i> Clientes (Web/Mobile)
-                    </div>
-                    <div class="h-4 w-px bg-cyan-500/50 relative"><div class="absolute inset-0 animated-line-vertical"></div></div>
-                    <div class="diagram-node glow-cyan bg-cyan-900/40 border-2 border-cyan-500 rounded-lg w-full py-2 text-center text-cyan-300 font-bold text-xs">
-                        API GATEWAY & ENRUTAMIENTO
-                    </div>
-                </div>
-
-                <!-- Nodes Grid -->
-                <div class="w-full grid grid-cols-2 gap-4 relative">
-                    
-                    <!-- SVG Lines connecting Gateway to Services -->
-                    <svg class="absolute inset-0 w-full h-10 -top-8 z-0 pointer-events-none" preserveAspectRatio="none">
-                        <path d="M 50%,0 L 25%,100 M 50%,0 L 75%,100" stroke="rgba(6, 182, 212, 0.4)" stroke-width="1.5" fill="none" class="dash-anim"/>
-                    </svg>
-
-                    <!-- MS 1: Auth -->
-                    <div class="diagram-node flex flex-col items-center">
-                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40">
-                            <i data-lucide="shield" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
-                            <div class="text-[10px] font-bold text-gray-200">MS Autenticación</div>
-                        </div>
-                        <div class="h-4 w-px bg-purple-500/50"></div>
-                        <div class="bg-gray-900 border border-purple-800 rounded-full px-3 py-1 text-[9px] text-purple-300 flex items-center gap-1">
-                            <i data-lucide="database" class="w-3 h-3"></i> Redis
-                        </div>
-                    </div>
-
-                    <!-- MS 2: Academico -->
-                    <div class="diagram-node flex flex-col items-center">
-                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40">
-                            <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
-                            <div class="text-[10px] font-bold text-gray-200">MS Académico</div>
-                        </div>
-                        <div class="h-4 w-px bg-blue-500/50"></div>
-                        <div class="bg-gray-900 border border-blue-800 rounded-full px-3 py-1 text-[9px] text-blue-300 flex items-center gap-1">
-                            <i data-lucide="database" class="w-3 h-3"></i> PostgreSQL
-                        </div>
-                    </div>
-
-                    <!-- MS 3: Eval -->
-                    <div class="diagram-node flex flex-col items-center col-span-2 mt-2 w-1/2 mx-auto">
-                        <div class="absolute w-px h-4 bg-cyan-500/50 -top-4"></div>
-                        <div class="bg-gray-800 border border-cyan-600 p-2 rounded-lg text-center w-full shadow-lg shadow-cyan-900/40 relative">
-                            <i data-lucide="file-edit" class="w-4 h-4 text-cyan-400 mx-auto mb-1"></i>
-                            <div class="text-[10px] font-bold text-gray-200">MS Evaluaciones</div>
-                        </div>
-                        <div class="h-4 w-px bg-green-500/50"></div>
-                        <div class="bg-gray-900 border border-green-800 rounded-full px-3 py-1 text-[9px] text-green-300 flex items-center gap-1">
-                            <i data-lucide="database" class="w-3 h-3"></i> MongoDB
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Event Bus (Optional representation) -->
-                <div class="mt-6 w-full border-t border-dashed border-gray-700 pt-3 text-center">
-                    <span class="text-[10px] text-gray-500 tracking-widest"><i data-lucide="zap" class="inline w-3 h-3"></i> EVENT BUS ASÍNCRONO</span>
-                </div>
-            </div>
-        </article>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-16 text-center text-gray-600 text-sm border-t border-gray-800 w-full max-w-7xl pt-6">
-        <p>Documento Base: ProUdeC de Monolito a Microservicios | Universidad de Cundinamarca</p>
-        <p class="text-xs mt-1">Ingeniería de Software II - Mayo 2026</p>
-    </footer>
-
-    <script>
-        // Inicializar iconos de Lucide
-        lucide.createIcons();
+    <div class="max-w-7xl mx-auto px-4 py-12">
         
-        // Efecto parallax simple al mover el ratón
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('article');
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
-            
-            cards.forEach(card => {
-                // Solo aplicar a pantallas grandes para no romper mobile
-                if(window.innerWidth > 1024) {
-                    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-                }
-            });
+        <!-- Cabecera de la Presentación -->
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+                Arquitectura de Pagos Contextuales ZTNA
+            </h1>
+            <h2 class="text-xl text-slate-600 max-w-3xl mx-auto">
+                Evolución de Apple Pay basada en Zero Trust, AI-Driven Payments y Tokenización Reversible Dinámica Contextual.
+            </h2>
+            <div class="mt-6 flex justify-center gap-4 text-sm font-semibold">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">Ingeniería de Software II</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full">Arquitectura Empresarial</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">Seguridad Financiera</span>
+            </div>
+        </header>
+
+        <!-- Contenedor del Diagrama UML -->
+        <main>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    sequenceDiagram
+                        autonumber
+
+                        %% AGRUPACIÓN POR CAPAS DE ARQUITECTURA (Enterprise Architecture)
+                        box rgb(241, 245, 249) "Dispositivo Edge (Cliente)"
+                            actor U as Usuario
+                            participant IP as iPhone (Apple Pay)
+                            participant FID as Face ID
+                            participant SE as Secure Enclave
+                        end
+
+                        box rgb(243, 232, 255) "Capa Cognitiva y Contextual"
+                            participant AI as AI Risk Engine
+                            participant BAS as Behavioral Analysis
+                            participant CVA as Context Validation API
+                        end
+
+                        box rgb(224, 242, 254) "Infraestructura Zero Trust"
+                            participant DTG as Dynamic Token Gen
+                            participant ZTG as Zero Trust Gateway
+                            participant DTV as Distributed Token Vault
+                        end
+
+                        box rgb(220, 252, 231) "Redes Financieras Core"
+                            participant VM as Visa/Mastercard
+                            participant B as Banco Emisor
+                        end
+
+                        box rgb(254, 226, 226) "Gobernanza y Cumplimiento"
+                            participant AUD as Monitor & Auditoría
+                        end
+
+                        %% FASE 1: REGISTRO DE LA TARJETA
+                        Note over U, AUD: FASE 1: Registro y Provisionamiento de la Tarjeta
+                        U->>+IP: Registrar tarjeta bancaria
+                        IP->>+B: Solicitud de validación de tarjeta real
+                        B->>+VM: Verificación financiera (BIN, Fondos, Estado)
+                        VM-->>-B: Confirmación de red
+                        B->>+DTV: Crear relación [DAN ↔ Tarjeta Real]
+                        DTV-->>-B: Bóveda actualizada / Confirmación
+                        B->>+SE: Enviar Device Account Number (DAN)
+                        SE->>SE: Almacenar DAN criptográficamente
+                        SE-->>-B: Acuse de recibo
+                        B->>AUD: Registrar evento (Provisionamiento Exitoso)
+                        B-->>-IP: Tarjeta registrada exitosamente
+                        IP-->>-U: Mostrar tarjeta en Wallet
+
+                        %% FASE 2: INICIO DE PAGO
+                        Note over U, AUD: FASE 2: Inicio de Pago NFC
+                        U->>+IP: Iniciar pago NFC en Terminal
+                        IP->>+FID: Solicitar autenticación biométrica
+                        FID-->>-IP: Usuario validado exitosamente
+                        IP->>+SE: Solicitar DAN encriptado
+                        SE-->>-IP: Entregar DAN para transacción
+
+                        %% FASE 3: EVALUACIÓN CONTEXTUAL INTELIGENTE
+                        Note over U, AUD: FASE 3: Evaluación Contextual Inteligente (AI-Driven)
+                        IP->>+AI: Solicitar evaluación de riesgo (DAN + Metadatos)
+                        
+                        AI->>+BAS: Analizar comportamiento histórico del usuario
+                        BAS-->>-AI: Resultado de desviación de comportamiento
+                        
+                        AI->>+CVA: Verificar contexto transaccional
+                        Note right of CVA: Analiza:<br/>- Ubicación geográfica<br/>- Hora local<br/>- Identificador de dispositivo<br/>- Seguridad de red (IP/VPN)<br/>- Estado biométrico<br/>- Historial de transacciones
+                        CVA-->>-AI: Vector de validación contextual
+                        
+                        AI->>AI: Computar Risk Score Dinámico
+
+                        %% FASE 4: DECISIÓN DE RIESGO Y TOKENIZACIÓN
+                        Note over U, AUD: FASE 4: Decisión de Riesgo (ALT Block) y Generación de TEC
+                        alt Riesgo Bajo (Transacción Habitual)
+                            AI->>+DTG: Autorizar emisión de Token Contextual
+                        else Riesgo Medio (Anomalía Leve)
+                            AI-->>IP: Solicitar autenticación adicional (Step-up Auth)
+                            IP-->>U: Requerir PIN del dispositivo
+                            U->>IP: Ingresa PIN correcto
+                            IP->>AI: Confirmación de desafío exitosa
+                            AI->>DTG: Autorizar emisión de Token Contextual
+                        else Riesgo Alto (Posible Fraude / Ataque)
+                            AI->>+ZTG: Emitir comando de bloqueo transaccional
+                            ZTG->>AUD: Registrar alerta crítica de seguridad
+                            ZTG-->>-IP: Transacción denegada (Contexto Inseguro)
+                            IP-->>-U: Notificar bloqueo de pago
+                            Note right of IP: Fin prematuro del flujo
+                        end
+
+                        %% FASE 4 (Cont.): Generación del TEC (Flujo Exitoso)
+                        DTG->>DTG: Generar Token Efímero Contextual (TEC)
+                        Note over DTG: TEC se acopla a:<br/>DAN, Biometría, Ubicación, <br/>Dispositivo, Timestamp, Risk Score
+                        Note over DTG, DTV: Mapa Lógico: [TEC] ➜ [DAN] ➜ [Tarjeta Real]
+
+                        %% FASE 5: VALIDACIÓN ZERO TRUST
+                        Note over U, AUD: FASE 5: Inspección y Validación Zero Trust
+                        DTG->>+ZTG: Enviar TEC encapsulado para ruteo
+                        ZTG->>ZTG: Validar Políticas ZT (Identidad, Contexto, Riesgo)
+                        ZTG->>+DTV: Resolver TEC ➜ DAN
+                        DTV-->>-ZTG: Relación validada / Retornar DAN
+                        
+                        %% FASE 6: PROCESAMIENTO FINANCIERO
+                        Note over U, AUD: FASE 6: Procesamiento Financiero Tradicional con DAN
+                        ZTG->>+VM: Solicitar autorización de pago (Usando DAN)
+                        VM->>+B: Solicitar validación financiera y compensación
+                        B->>+DTV: Resolver DAN ➜ Tarjeta Real
+                        DTV-->>-B: Retornar PAN y detalles de Tarjeta Real
+                        B->>B: Validar fondos y reglas de negocio bancarias
+                        B-->>-VM: Aprobación financiera
+                        VM-->>-ZTG: Confirmación de compensación por red
+                        ZTG-->>-IP: Relevo de pago aprobado
+                        IP-->>U: Confirmación visual y respuesta háptica
+
+                        %% FASE 7: EXPIRACIÓN Y LIMPIEZA
+                        Note over U, AUD: FASE 7: Desplome de Sesión y Expiración del Token
+                        DTG->>+DTV: Enviar señal de invalidación (TTL o Uso consumido)
+                        DTV->>DTV: Eliminar relación temporal [TEC ↔ DAN]
+                        DTV->>+AUD: Registrar destrucción y fin de ciclo vital del TEC
+                        AUD-->>-DTV: Log guardado
+                        DTV-->>-DTG: Limpieza confirmada
+                        Note over DTG, DTV: TEC expira automáticamente.<br/>Prevención total contra Replay Attacks y clonación.
+
+                </div>
+            </div>
+        </main>
+
+        <!-- Glosario de Componentes y Notas Explicativas -->
+        <section class="mt-8">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Glosario de Arquitectura y Componentes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="note-card p-6 rounded-lg shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="p-2 bg-slate-100 rounded text-slate-600">📱</span>
+                        <h4 class="text-lg font-bold text-slate-800">DAN</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 font-semibold mb-1">Device Account Number</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Identificador persistente almacenado en el <em>Secure Enclave</em> del iPhone. Reemplaza el número real (PAN) de la tarjeta de crédito, impidiendo la exposición de datos financieros en caso de compromiso del dispositivo.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="note-card p-6 rounded-lg shadow-sm border border-slate-200" style="border-left-color: #8b5cf6;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="p-2 bg-purple-100 rounded text-purple-600">🧠</span>
+                        <h4 class="text-lg font-bold text-slate-800">AI Risk Engine</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 font-semibold mb-1">Motor de Decisión Cognitiva</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Subsistema que computa en milisegundos un <em>Risk Score</em>. Cruza datos de comportamiento histórico (BAS) y variables de contexto en tiempo real (CVA) para decidir si permitir, exigir más fricción o denegar un pago.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="note-card p-6 rounded-lg shadow-sm border border-slate-200" style="border-left-color: #10b981;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="p-2 bg-green-100 rounded text-green-600">🔑</span>
+                        <h4 class="text-lg font-bold text-slate-800">TEC</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 font-semibold mb-1">Token Efímero Contextual</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        El núcleo de la propuesta. A diferencia del DAN estático, el TEC es dinámico y de un solo uso. Encapsula factores biométricos, geográficos y de tiempo. Posee caducidad automática al procesar la compra.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="note-card p-6 rounded-lg shadow-sm border border-slate-200" style="border-left-color: #f59e0b;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="p-2 bg-amber-100 rounded text-amber-600">🛡️</span>
+                        <h4 class="text-lg font-bold text-slate-800">Zero Trust Gateway</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 font-semibold mb-1">Punto de Control Perimetral</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Aplica el principio <em>"Nunca confíes, siempre verifica"</em>. Solo permite que la transacción viaje hacia las redes de pago si el TEC es matemáticamente válido, el contexto fue verificado por IA y el dispositivo está íntegro.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="note-card p-6 rounded-lg shadow-sm border border-slate-200" style="border-left-color: #0ea5e9;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="p-2 bg-sky-100 rounded text-sky-600">🗄️</span>
+                        <h4 class="text-lg font-bold text-slate-800">Distributed Token Vault</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 font-semibold mb-1">Bóveda Criptográfica Distribuida</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Base de datos altamente segura encargada del mapeo de resoluciones. Traduce <code>TEC ➜ DAN</code> para la capa Zero Trust, y <code>DAN ➜ Tarjeta Real</code> únicamente a solicitud del Banco Emisor autorizado.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Carga e inicialización de Mermaid.js -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            securityLevel: 'loose',
+            sequence: {
+                showSequenceNumbers: true,
+                actorMargin: 50,
+                messageMargin: 40,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                activationMargin: 10
+            },
+            themeVariables: {
+                primaryColor: '#ffffff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#cbd5e1',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#e2e8f0',
+                noteBkgColor: '#fffbeb',
+                noteTextColor: '#451a03',
+                noteBorderColor: '#fde68a',
+                activationBorderColor: '#2563eb',
+                activationBkgColor: '#dbeafe',
+                sequenceNumberColor: '#ffffff',
+                actorBkg: '#f8fafc',
+                actorBorder: '#94a3b8'
+            }
         });
     </script>
 </body>
